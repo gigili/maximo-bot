@@ -1,0 +1,25 @@
+{
+	"name": "maximo-bot",
+	"version": "1.0.0",
+	"description": "Custom made chat bot for twitch.tv",
+	"main": "maximo.ts",
+	"scripts": {
+		"dev": "nodemon"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gigili/maximo-bot.git"
+	},
+	"keywords": [
+		"twitch",
+		"node",
+		"bot",
+		"tmi.js"
+	],
+	"author": "Igor Ilić",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/gigili/maximo-bot/issues"
+	},
+	"homepage": "https://github.com/gigili/maximo-bot#readme"
+}
