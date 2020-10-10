@@ -1,0 +1,16 @@
+import axios from 'axios';
+import {TwitchAuth} from "./types";
+
+const client_secret = process.env.CLIENT_SECRET;
+const client_id = process.env.CLIENT_ID;
+
+export async function getTwitchToken() {
+	const response = await axios.post(`https://id.twitch.tv/oauth2/token?scope=user:edit&response_type=token&client_secret=${client_secret}&grant_type=client_credentials`, {
+		headers: {
+			'Accept': 'application/vnd.twitchtv.v5+json',
+			'Client-ID': client_id
+		}
+	});
+
+	return (response.data as TwitchAuth).access_token;
+}
