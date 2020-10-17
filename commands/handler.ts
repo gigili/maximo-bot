@@ -1,7 +1,7 @@
 import {User} from "../utility/types";
 import commands from "./staticCommands";
 
-export function GetCommandName(command: string, args: unknown, user: User, channel: string) {
+export function GetCommandName(command: string, args: string[], user: User, channel: string) {
 	switch (String(command).toLowerCase()) {
 		case "!hello":
 			commands.hello(channel, user);
@@ -28,6 +28,14 @@ export function GetCommandName(command: string, args: unknown, user: User, chann
 
 		case "!uptime":
 			commands.uptime(channel, user);
+			break;
+
+		case "!hug":
+			commands.hug(channel, user, args[0])
+			break;
+
+		case "!yeet":
+			commands.yeet(channel, user, args[0]);
 			break;
 	}
 }

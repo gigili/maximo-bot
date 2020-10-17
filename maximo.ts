@@ -9,16 +9,16 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 	const getCommandFromMessage = message.split(" ")[0];
 	const getRestOfMessage = message.split(" ").slice(1);
 
-	if (!message || !message.startsWith("!")) {
-		return false;
-	}
+	if (message && message.startsWith("!")) {
+		commandController.GetCommandName(
+			getCommandFromMessage,
+			getRestOfMessage,
+			tags,
+			channel
+		);
 
-	commandController.GetCommandName(
-		getCommandFromMessage,
-		getRestOfMessage,
-		tags,
-		channel
-	);
+		return;
+	}
 });
 
 process.on('unhandledRejection', (err, promise) => {

@@ -61,5 +61,15 @@ export default {
 		const date = response.data.data.started_at;
 
 		await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);
+	},
+
+	hug(channel: string, user: User, message: string) {
+		if (!message) return;
+		tmiClient.say(channel, `Hey ${message}, @${user['display-name']} is sending you virtual hugs <3`);
+	},
+
+	yeet(channel: string, user: User, message: string) {
+		if (!message) return;
+		tmiClient.say(channel, `@${user['display-name']} has yeeted ${message} into the oblivion.`);
 	}
 }
