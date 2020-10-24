@@ -1,6 +1,9 @@
 # Maximo Bot
+![Repo size badge](https://img.shields.io/github/repo-size/gigili/maximo-bot?style=for-the-badge)
+![Open issues badge](https://img.shields.io/github/issues/gigili/maximo-bot?style=for-the-badge)
+![Licence badge](https://img.shields.io/github/license/gigili/maximo-bot?style=for-the-badge)
 
-Twitch chat bot developed by [GacBL](https://twitch.tv/gacbl) and his chat community live over on Twitch.
+Twitch chat bot developed by [GacBL](https://twitch.tv/gacbl) and chat live over on Twitch.
 
 ## Commands
 
