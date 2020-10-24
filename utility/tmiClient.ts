@@ -1,10 +1,11 @@
 import {config} from "./config";
 import {MemeBox} from "../memebox";
+import {ConnectionOptions} from "./types";
 
 const tmi = require('tmi.js');
 require("dotenv").config();
 
-const connectionOptions = {
+const connectionOptions: ConnectionOptions = {
 	reconnect: true,
 	secure: true,
 };
@@ -23,6 +24,6 @@ export const client = new tmi.Client({
 	channels: config.channels,
 });
 
-client.connect().catch(err => console.error(err)).then(() => {
-	MemeBox.initMemeBox();
-});
+client.connect()
+	.then(() => MemeBox.initMemeBox())
+	.catch(() => console.error(`[ERROR] Unable to connect to IRC server`));

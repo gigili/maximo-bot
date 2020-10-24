@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
 	'badges': { broadcaster: string, 'warcraft': string },
 	'color': string,
 	'display-name': string,
@@ -15,13 +15,13 @@ export interface User {
 	'message-type': string
 }
 
-export interface DadJoke {
+export type DadJoke = {
 	id: string,
 	joke: string,
 	status: number
 }
 
-export interface ChuckNorrisJoke {
+export type ChuckNorrisJoke = {
 	categories: string[],
 	created_at: string,
 	updated_at: string,
@@ -31,9 +31,43 @@ export interface ChuckNorrisJoke {
 	"value": string
 }
 
-export interface TwitchAuth {
+export type TwitchAuth = {
 	"access_token": string,
 	"expires_in": number,
 	"scope": string[],
 	"token_type": "bearer"
+}
+
+export type Config = {
+	channels: string[],
+	debug: {
+		enabled: boolean,
+		url: string
+	},
+	memebox: {
+		enabled: boolean,
+		url: string,
+		wsClient: WebSocket | null
+	}
+}
+
+export type MemeBoxConfig = {
+	events: { [key: string]: MemeBoxEvent }
+}
+
+export type MemeBoxEvent = {
+	enabled: boolean,
+	clipID: string,
+	message?: string
+}
+
+export type MemeBoxAction = {
+	id: string,
+	message?: string
+}
+
+export type ConnectionOptions = {
+	reconnect: boolean,
+	secure: boolean,
+	server?: string
 }

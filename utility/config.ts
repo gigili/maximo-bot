@@ -1,7 +1,9 @@
-export const config = {
+import {Config} from "./types";
+
+export const config: Config = {
 	channels: ["gacbl"],
 	debug: {
-		enabled: false,
+		enabled: true,
 		url: "irc.fdgt.dev"
 	},
 	memebox: {

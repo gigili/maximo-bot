@@ -1,11 +1,11 @@
 import {ChuckNorrisJoke, DadJoke, User} from "../utility/types";
-import {AxiosRequestConfig} from "axios";
+import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {getTwitchToken} from "../utility/auth";
 
 const tmiClient = require("../utility/tmiClient");
 const axios = require("axios");
 
-let token = null;
+let token: String | null = null;
 export default {
 	hello(channel: string, user: User) {
 		tmiClient.say(channel, `Hey ${user.username}. Welcome, sit back and enjoy`);
@@ -53,10 +53,10 @@ export default {
 
 		axios.get(`https://api.twitch.tv/helix/users?id=${process.env.USER_ID}&client_id=${process.env.CLIENT_ID}`, {
 			headers: {"Authorization": `Bearer ${token}`}
-		}).then(async (response) => {
+		}).then(async (response: AxiosResponse) => {
 			const date = response.data.data.started_at;
 			await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);
-		}).catch(error => {
+		}).catch((error: any) => {
 			console.error("[ERROR]", error.response.data.message);
 		});
 	},

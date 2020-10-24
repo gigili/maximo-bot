@@ -1,12 +1,16 @@
-export const memeboxConfig = {
+import {MemeBoxConfig} from "../utility/types";
+
+export const memeBoxConfig: MemeBoxConfig = {
 	events: {
 		hosted: { // Channel is now hosted by another broadcaster.
 			enabled: true,
 			clipID: "",
+			message: "{args[1]} hosted us for {args[2]} viewers <3",
 		},
 		raided: { // Channel is now being raided by another broadcaster.
 			enabled: true,
-			clipID: "0bfb38e8-88b1-4ef0-b91e-965239481197"
+			clipID: "0bfb38e8-88b1-4ef0-b91e-965239481197",
+			message: "{args[1]} raided us with {args[2]} viewers <3",
 		},
 		ban: { // Username has been banned on a channel.
 			enabled: true,
