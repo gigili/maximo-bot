@@ -42,34 +42,42 @@ export default {
 		await tmiClient.say(channel, (data as ChuckNorrisJoke).value);
 	},
 
-	lurk(channel: string) {
-		tmiClient.say(channel, 'No worries, we all like some background noise while working :)')
+	lurk(channel: string, user: User) {
+		tmiClient.say(channel, `${user.username} was teleported into the lurk lounge. Drinks will be served shortly.`)
 	},
 
-	//TODO: Fix this, 400 response code | NOT WORKING
 	async uptime(channel: string, user: User) {
 		if (!token) {
 			token = await getTwitchToken();
 		}
 
-		const response = await axios.get(`https://api.twitch.tv/helix/streams?user_login=gacbl`, {
-			headers: {
-				"Authorization": `Bearer ${token}`,
-				"Client-Id": process.env.CLIENT_ID
-			}
+		axios.get(`https://api.twitch.tv/helix/users?id=${process.env.USER_ID}&client_id=${process.env.CLIENT_ID}`, {
+			headers: {"Authorization": `Bearer ${token}`}
+		}).then(async (response) => {
+			const date = response.data.data.started_at;
+			await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);
+		}).catch(error => {
+			console.error("[ERROR]", error.response.data.message);
 		});
-		const date = response.data.data.started_at;
-
-		await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);
 	},
 
 	hug(channel: string, user: User, message: string) {
 		if (!message) return;
+
+		if (message.indexOf("@") !== -1) {
+			message = message.replace("@", "");
+		}
+
 		tmiClient.say(channel, `Hey ${message}, @${user['display-name']} is sending you virtual hugs <3`);
 	},
 
 	yeet(channel: string, user: User, message: string) {
 		if (!message) return;
+
+		if (message.indexOf("@") !== -1) {
+			message = message.replace("@", "");
+		}
+
 		tmiClient.say(channel, `@${user['display-name']} has yeeted ${message} into the oblivion.`);
 	}
 }

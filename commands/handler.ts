@@ -23,7 +23,7 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 			break;
 
 		case "!lurk":
-			commands.lurk(channel);
+			commands.lurk(channel, user);
 			break;
 
 		case "!uptime":

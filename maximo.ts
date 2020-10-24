@@ -1,7 +1,8 @@
 import {User} from "./utility/types";
+import {client} from "./utility/tmiClient";
 
-const client = require("./utility/tmiClient");
 const commandController = require("./commands/handler");
+
 
 client.on('message', (channel: string, tags: User, message: string, self: unknown) => {
 	if (self) return;
