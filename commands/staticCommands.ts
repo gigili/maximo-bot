@@ -1,8 +1,8 @@
 import {ChuckNorrisJoke, DadJoke, User} from "../utility/types";
 import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {getTwitchToken} from "../utility/auth";
+import {client as tmiClient} from "../utility/tmiClient";
 
-const tmiClient = require("../utility/tmiClient");
 const axios = require("axios");
 
 let token: String | null = null;

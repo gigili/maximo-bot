@@ -14,7 +14,6 @@ export const MemeBox = {
 			if (memeBoxConfig.events[eventName].enabled) {
 				const event = memeBoxConfig.events[eventName];
 				client.on(eventName, (...args: []) => {
-					//console.log(args);
 					const clipData: MemeBoxAction = {
 						id: event.clipID
 					};
@@ -29,12 +28,13 @@ export const MemeBox = {
 					}
 
 					if (config.memebox.wsClient !== null) {
-						config.memebox.wsClient.send(`TRIGGER_CLIP=${JSON.stringify(clipData)}`)
+						console.log(config.memebox.wsClient);
+						//config.memebox.wsClient.send(`TRIGGER_CLIP=${JSON.stringify(clipData)}`)
 					}
 				})
 			}
 		});
 
-		client.say("#gacbl", "raid --username gacbl");
+		//client.say("#gacbl", "raid --username gacbl");
 	}
 }
