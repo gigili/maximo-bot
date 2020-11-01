@@ -43,7 +43,7 @@ export default {
 	},
 
 	lurk(channel: string, user: User) {
-		tmiClient.say(channel, `${user.username} was teleported into the lurk lounge. Drinks will be served shortly.`)
+		tmiClient.say(channel, `/me ${user.username} was teleported into the lurk lounge.`);
 	},
 
 	async uptime(channel: string, user: User) {
@@ -51,11 +51,15 @@ export default {
 			token = await getTwitchToken();
 		}
 
-		axios.get(`https://api.twitch.tv/helix/users?id=${process.env.USER_ID}&client_id=${process.env.CLIENT_ID}`, {
-			headers: {"Authorization": `Bearer ${token}`}
+		axios.get(`https://api.twitch.tv/helix/users?id=${process.env.BOT_USER_ID}`, {
+			headers: {
+				"authorization": `Bearer ${token}`,
+				"client_id" : process.env.CLIENT_ID
+			}
 		}).then(async (response: AxiosResponse) => {
-			const date = response.data.data.started_at;
-			await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);
+			console.log(response.data);
+			/*const date = response.data.data.started_at;
+			await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);*/
 		}).catch((error: any) => {
 			console.error("[ERROR]", error.response.data.message);
 		});
