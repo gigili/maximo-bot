@@ -15,7 +15,7 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 		constemote = emotes[Math.floor(Math.random() * emotes.length)];
 		setTimeout(() => {
 			client.say(channel, `!drop ${emote}`);
-		}, 1500);
+		}, 2500);
 		return;
 	}
 	
