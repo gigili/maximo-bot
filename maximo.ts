@@ -11,8 +11,8 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 	const getRestOfMessage = message.split(" ").slice(1);
 
 	if(message.startsWith("!drop") && tags.username.toLowerCase() === "gacbl"){
-		constemotes = ["Kappa", "KappaPride", "KappaRoss", "KappaWealth", ""];
-		constemote = emotes[Math.floor(Math.random() * emotes.length)];
+		const emotes = ["Kappa", "KappaPride", "KappaRoss", "KappaWealth", ""];
+		const emote = emotes[Math.floor(Math.random() * emotes.length)];
 		setTimeout(() => {
 			client.say(channel, `!drop ${emote}`);
 		}, 2500);
