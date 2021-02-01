@@ -15,10 +15,10 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 		const emote = emotes[Math.floor(Math.random() * emotes.length)];
 		setTimeout(() => {
 			client.say(channel, `!drop ${emote}`);
-		}, 2500);
+		}, 3500);
 		return;
 	}
-	
+
 	if (message && message.startsWith("!")) {
 		commandController.GetCommandName(
 			getCommandFromMessage,
@@ -28,6 +28,13 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 		);
 
 		return;
+	}
+});
+
+client.on("join", async (channel: string, username: string, self: Boolean) => {
+	console.log(`${username} just joined ${channel}`)
+	if (username.toLowerCase() === "asapjoeyx") {
+		await client.say(channel, `Welcome in @${username}. You a dikhead <3`)
 	}
 });
 
