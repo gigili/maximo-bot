@@ -1,7 +1,7 @@
 import {Config} from "./types";
 
 export const config: Config = {
-	channels: ["gacbl"],
+	channels: ["gacbl", "thatn00b__", "gabbo1416"],
 	debug: {
 		enabled: false,
 		url: "irc.fdgt.dev"
