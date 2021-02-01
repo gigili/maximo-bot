@@ -32,7 +32,6 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 });
 
 client.on("join", async (channel: string, username: string, self: Boolean) => {
-	console.log(`${username} just joined ${channel}`)
 	if (username.toLowerCase() === "asapjoeyx") {
 		await client.say(channel, `Welcome in @${username}. You a dikhead <3`)
 	}
