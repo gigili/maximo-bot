@@ -83,9 +83,22 @@ export default {
 		}
 
 		tmiClient.say(channel, `@${user['display-name']} has yeeted ${message} into the oblivion.`);
-	}
+	},
 	
 	codepow(channel: string, user : User){
 		tmiClient.say(channel, `Working on CodePow (Pow IT) which is a Twitter clone for developers which integrates NLP to detect intent and technologies in their messages think StackOverFlow + Twitter (www.codepow.io)`);
+	},
+
+	github(channel: string, user: User){
+		console.log(channel);
+		if(channel === "#gacbl"){
+			tmiClient.say(channel, "You can find most of my project on my GitHub profile: https://github.com/gigili");
+		}
+	},
+
+	discord(channel: string, user: User){
+		if(channel === "#gacbl"){
+			tmiClient.say(channel, "We are part of the N00bNation discord server. Join us: https://discord.gg/zfkCF63");
+		}
 	}
 }
