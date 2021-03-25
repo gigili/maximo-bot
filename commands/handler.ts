@@ -37,5 +37,8 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 		case "!yeet":
 			commands.yeet(channel, user, args[0]);
 			break;
+		case "!codepow":
+			commands.codepow(channel, user);
+			break;
 	}
 }
