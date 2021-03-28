@@ -1,11 +1,9 @@
 import {ChuckNorrisJoke, DadJoke, User} from "../utility/types";
 import {AxiosRequestConfig, AxiosResponse} from "axios";
-import {getTwitchToken} from "../utility/auth";
 import {client as tmiClient} from "../utility/tmiClient";
 
 const axios = require("axios");
 
-let token: String | null = null;
 export default {
 	hello(channel: string, user: User) {
 		tmiClient.say(channel, `Hey ${user.username}. Welcome, sit back and enjoy`);
@@ -47,22 +45,15 @@ export default {
 	},
 
 	async uptime(channel: string, user: User) {
-		if (!token) {
-			token = await getTwitchToken();
-		}
+		const channelName = channel.replace("#", "");
 
-		axios.get(`https://api.twitch.tv/helix/users?id=${process.env.BOT_USER_ID}`, {
-			headers: {
-				"authorization": `Bearer ${token}`,
-				"client_id" : process.env.CLIENT_ID
-			}
-		}).then(async (response: AxiosResponse) => {
-			console.log(response.data);
-			/*const date = response.data.data.started_at;
-			await tmiClient.say(channel, `Hey @${user.username}, the up time is: ${date}`);*/
-		}).catch((error: any) => {
-			console.error("[ERROR]", error.response.data.message);
-		});
+		axios.get(`https://beta.decapi.me/twitch/uptime/${channelName}`)
+			.then(async (response: AxiosResponse) => {
+				await tmiClient.say(channel, `Hey @${user.username}, the up time for ${channelName} is: ${response.data}`);
+			})
+			.catch((error: any) => {
+				console.error("[ERROR]", error.response.data.message);
+			});
 	},
 
 	hug(channel: string, user: User, message: string) {
@@ -84,20 +75,20 @@ export default {
 
 		tmiClient.say(channel, `@${user['display-name']} has yeeted ${message} into the oblivion.`);
 	},
-	
-	codepow(channel: string, user : User){
+
+	codepow(channel: string, user: User) {
 		tmiClient.say(channel, `Working on CodePow (Pow IT) which is a Twitter clone for developers which integrates NLP to detect intent and technologies in their messages think StackOverFlow + Twitter (www.codepow.io)`);
 	},
 
-	github(channel: string, user: User){
+	github(channel: string, user: User) {
 		console.log(channel);
-		if(channel === "#gacbl"){
+		if (channel === "#gacbl") {
 			tmiClient.say(channel, "You can find most of my project on my GitHub profile: https://github.com/gigili");
 		}
 	},
 
-	discord(channel: string, user: User){
-		if(channel === "#gacbl"){
+	discord(channel: string, user: User) {
+		if (channel === "#gacbl") {
 			tmiClient.say(channel, "We are part of the N00bNation discord server. Join us: https://discord.gg/zfkCF63");
 		}
 	}

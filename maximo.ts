@@ -1,16 +1,14 @@
 import {User} from "./utility/types";
 import {client} from "./utility/tmiClient";
+import {addNewCommand, deleteCommand, GetCommandName, updateCommand} from "./commands/handler";
 
-const commandController = require("./commands/handler");
-
-
-client.on('message', (channel: string, tags: User, message: string, self: unknown) => {
+client.on('message', async (channel: string, user: User, message: string, self: unknown) => {
 	if (self) return;
 
 	const getCommandFromMessage = message.split(" ")[0];
 	const getRestOfMessage = message.split(" ").slice(1);
 
-	if(message.startsWith("!drop") && tags.username.toLowerCase() === "gacbl"){
+	if (message.startsWith("!drop") && user.username.toLowerCase() === "gacbl") {
 		const emotes = ["Kappa", "KappaPride", "KappaRoss", "KappaWealth", ""];
 		const emote = emotes[Math.floor(Math.random() * emotes.length)];
 		setTimeout(() => {
@@ -20,14 +18,22 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 	}
 
 	if (message && message.startsWith("!")) {
-		commandController.GetCommandName(
+		const commandFound = GetCommandName(
 			getCommandFromMessage,
 			getRestOfMessage,
-			tags,
+			user,
 			channel
 		);
 
-		return;
+		if (commandFound) return;
+
+		if (message.startsWith("!add")) {
+			await addNewCommand(channel, message, user)
+		} else if (message.startsWith("!edit")) {
+			await updateCommand(channel, message, user)
+		} else if (message.startsWith("!delete")) {
+			await deleteCommand(channel, message, user)
+		}
 	}
 });
 

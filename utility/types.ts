@@ -1,18 +1,7 @@
-export type User = {
-	'badges': { broadcaster: string, 'warcraft': string },
-	'color': string,
-	'display-name': string,
-	'emotes': { '25': string[] },
-	'mod': boolean,
-	'room-id': string,
-	'subscriber': boolean,
-	'turbo': boolean,
-	'user-id': string,
-	'user-type': string,
-	'emotes-raw': string,
-	'badges-raw': string,
-	'username': string,
-	'message-type': string
+import {CommonUserstate} from "tmi.js";
+
+export interface User extends CommonUserstate {
+	username: string
 }
 
 export type DadJoke = {
@@ -70,4 +59,11 @@ export type ConnectionOptions = {
 	reconnect: boolean,
 	secure: boolean,
 	server?: string
+}
+
+export type PermissionLevels = {
+	isBroadcaster: boolean,
+	isMod: boolean,
+	isSub: boolean,
+	level: number
 }
