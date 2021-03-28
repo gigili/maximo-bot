@@ -3,12 +3,15 @@
 ![Open issues badge](https://img.shields.io/github/issues/gigili/maximo-bot?style=for-the-badge)
 ![Licence badge](https://img.shields.io/github/license/gigili/maximo-bot?style=for-the-badge)
 
-Twitch chat bot developed by [GacBL](https://twitch.tv/gacbl) and chat live over on Twitch.
+Twitch chatbot developed by [GacBL](https://twitch.tv/gacbl) and chat live over on Twitch.
 
 ## Commands
 
-| Command | Description |
-| :------ | :---------- |
+| Command    | Description    |
+| :---------| :-------------|
+| !add !{cmd} {output} --level {all\|sub\|mod\|broadcaster} | Add new command (Limited to mods and broadcaster) |
+| !edit !{cmd} {output} --level {all\|sub\|mod\|broadcaster} | Edit existing command (Limited to mods and broadcaster) |
+| !delete !{cmd} | Remove command (Limited to mods and broadcaster) |
 | !hello | Welcomes the users who used the command |
 | !wrongTip | Displays a random wrong developer tip |
 | !dad | Displays a random dad joke |
