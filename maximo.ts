@@ -31,12 +31,6 @@ client.on('message', (channel: string, tags: User, message: string, self: unknow
 	}
 });
 
-client.on("join", async (channel: string, username: string, self: Boolean) => {
-	if (username.toLowerCase() === "asapjoeyx") {
-		await client.say(channel, `Welcome in @${username}. You a dikhead <3`)
-	}
-});
-
 process.on('unhandledRejection', (err, promise) => {
 	console.error(`Error: ${err}`);
 });
