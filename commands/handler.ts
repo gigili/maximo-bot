@@ -192,6 +192,7 @@ export async function deleteCommand(channel: string, message: string, user: User
 		return;
 	}
 
+	await db.run("DELETE FROM alias WHERE channel = ? AND command = ?", [channel, command]);
 	const res = await db.run("DELETE FROM commands WHERE channel = ? AND command = ?", [channel, command]);
 	if (res) {
 		await tmiClient.say(channel, `Command ${command} was deleted successfully`);
