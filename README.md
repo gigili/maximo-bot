@@ -9,8 +9,8 @@ Twitch chatbot developed by [GacBL](https://twitch.tv/gacbl) and chat live over 
 
 | Command    | Description    |
 | :---------| :-------------|
-| !add !{cmd} {output} --level {all\|sub\|mod\|broadcaster} | Add new command (Limited to mods and broadcaster) |
-| !edit !{cmd} {output} --level {all\|sub\|mod\|broadcaster} | Edit existing command (Limited to mods and broadcaster) |
+| !add !{cmd} {output} --level {all\|sub\|mod\|broadcaster} | Add new command (Limited to mods and broadcaster). If `--level` is not specified all is used by default|
+| !edit !{cmd} {output} --level {all\|sub\|mod\|broadcaster} | Edit existing command (Limited to mods and broadcaster). If `--level` is not specified all is used by default |
 | !delete !{cmd} | Remove command (Limited to mods and broadcaster) |
 | !alias !{cmd} !{alias} | Create an alias for an existing function |
 | !rmalias !{alias} | Remove an existing alias |
