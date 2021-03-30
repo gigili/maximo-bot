@@ -1,6 +1,6 @@
 import {Database} from "sqlite3";
 
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require("sqlite3").verbose();
 
 
 export class DB {
@@ -15,11 +15,11 @@ export class DB {
 		return new Promise(function (resolve, reject) {
 			self.db = new sqlite3.Database("./db/maximo.db", (err: Error | null) => {
 				if (err) {
-					reject("Open error: " + err.message)
+					reject("Open error: " + err.message);
 				} else {
 					self.run("SELECT * FROM commands LIMIT 1")
 						.catch(() => {
-							console.log("CREATING TABLE commands")
+							console.log("CREATING TABLE commands");
 							self.run(`CREATE TABLE IF NOT EXISTS commands
 									  (
 										  channel    TEXT,
@@ -29,9 +29,10 @@ export class DB {
 										  created_at TEXT DEFAULT CURRENT_TIMESTAMP
 									  )`)
 								.then(() => {
-									console.log("CREATING TABLE aliases")
+									console.log("CREATING TABLE aliases");
 									self.run(`CREATE TABLE IF NOT EXISTS alias
 											  (
+												  channel    TEXT,
 												  command    TEXT,
 												  alias      TEXT,
 												  created_at TEXT DEFAULT CURRENT_TIMESTAMP
@@ -40,12 +41,12 @@ export class DB {
 								});
 						})
 						.then(() => {
-							console.log("OPENING CONNECTION")
-							resolve("DB connection opened")
+							console.log("OPENING CONNECTION");
+							resolve("DB connection opened");
 						});
 				}
 			});
-		})
+		});
 	}
 
 	static async getInstance(): Promise<DB> {
@@ -64,8 +65,11 @@ export class DB {
 		const db = (await DB.getInstance()).db;
 		return new Promise(function (resolve, reject) {
 			db?.run(query, params, (err: Error | null) => {
-				if (err) reject(err.message)
-				else resolve(true)
+				if (err) {
+					reject(err.message);
+				} else {
+					resolve(true);
+				}
 			});
 		});
 	}
@@ -74,8 +78,11 @@ export class DB {
 		const db = (await DB.getInstance()).db;
 		return new Promise(function (resolve, reject) {
 			db?.get(query, params, function (err: Error | null, row) {
-				if (err) reject("Read error: " + err.message)
-				else resolve(row)
+				if (err) {
+					reject("Read error: " + err.message);
+				} else {
+					resolve(row);
+				}
 			})
 		})
 	}

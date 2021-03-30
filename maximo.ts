@@ -1,8 +1,8 @@
 import {User} from "./utility/types";
 import {client} from "./utility/tmiClient";
-import {addNewCommand, deleteCommand, GetCommandName, updateCommand} from "./commands/handler";
+import {GetCommandName} from "./commands/handler";
 
-client.on('message', async (channel: string, user: User, message: string, self: unknown) => {
+client.on("message", async (channel: string, user: User, message: string, self: unknown) => {
 	if (self) return;
 
 	const getCommandFromMessage = message.split(" ")[0];
@@ -18,7 +18,7 @@ client.on('message', async (channel: string, user: User, message: string, self: 
 	}
 
 	if (message && message.startsWith("!")) {
-		const commandFound = GetCommandName(
+		const commandFound = await GetCommandName(
 			getCommandFromMessage,
 			getRestOfMessage,
 			user,
@@ -26,17 +26,9 @@ client.on('message', async (channel: string, user: User, message: string, self: 
 		);
 
 		if (commandFound) return;
-
-		if (message.startsWith("!add")) {
-			await addNewCommand(channel, message, user)
-		} else if (message.startsWith("!edit")) {
-			await updateCommand(channel, message, user)
-		} else if (message.startsWith("!delete")) {
-			await deleteCommand(channel, message, user)
-		}
 	}
 });
 
-process.on('unhandledRejection', (err, promise) => {
+process.on("unhandledRejection", (err, promise) => {
 	console.error(`Error: ${err}`);
 });

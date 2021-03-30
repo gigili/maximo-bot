@@ -8,7 +8,7 @@ export const config: Config = {
 	},
 	memebox: {
 		enabled: false,
-		url: "ws://localhost:4444",
+		url: "ws://localhost:4545",
 		wsClient: null
 	}
 }

@@ -67,3 +67,15 @@ export type PermissionLevels = {
 	isSub: boolean,
 	level: number
 }
+
+export type Command = {
+	channel: string,
+	command: string,
+	output: string,
+	level: number,
+	created_at: string
+}
+
+export type MessageVariables = {
+	[key: string]: string
+}

@@ -28,7 +28,8 @@ export const MemeBox = {
 					}
 
 					if (config.memebox.wsClient !== null) {
-						console.log(config.memebox.wsClient);
+						//console.log(config.memebox.wsClient);
+						console.log(clipData);
 						//config.memebox.wsClient.send(`TRIGGER_CLIP=${JSON.stringify(clipData)}`)
 					}
 				})
