@@ -1,6 +1,6 @@
 {
 	"name": "maximo-bot",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Custom made chat bot for twitch.tv",
 	"main": "maximo.ts",
 	"scripts": {
