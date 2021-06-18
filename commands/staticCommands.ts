@@ -1,95 +1,55 @@
 import {ChuckNorrisJoke, DadJoke, User} from "../utility/types";
-import {AxiosRequestConfig, AxiosResponse} from "axios";
-import {client as tmiClient} from "../utility/tmiClient";
+import {AxiosRequestConfig} from "axios";
 
 const axios = require("axios");
 
 export default {
-	hello(channel: string, user: User) {
-		tmiClient.say(channel, `Hey ${user.username}. Welcome, sit back and enjoy`);
+	hello(user: User | string) {
+		return `Hey ${user}. Welcome, sit back and enjoy`;
 	},
 
-	async wrongTip(channel: string, user: User) {
+	async wrongTip(user: User | string): Promise<string> {
 		const gistUrl = "https://gist.githubusercontent.com/gigili/275b0f19c4cb564bda3d3a81c0136d8f/raw/d3719d3a19570f59982286950947e309bc7e6105/wrong-developer-tips.json";
-		const result = await axios.get(gistUrl)
+		const result = await axios.get(gistUrl);
 		const randomTipIndex = Math.floor(Math.random() * result.data.length) + 1;
-		const wrongtip = result.data[randomTipIndex];
-
-		await tmiClient.say(channel, `Hey @${user.username}, your wrong tip is: ${wrongtip}`);
+		return `Hey ${user}, your wrong tip is: ${result.data[randomTipIndex]}`;
 	},
 
-	wrongTop(channel: string, user: User) {
-		tmiClient.say(channel, `Hey @${user.username}, I think you meant the tip not top Kappa`);
+	wrongTop(user: User | string) {
+		return `Hey @${user}, I think you meant the tip not top Kappa`;
 	},
 
-	async dadJoke(channel: string) {
+	async dadJoke() {
 		const url = "https://icanhazdadjoke.com/";
 		const headers: AxiosRequestConfig = {
 			headers: {
 				"Accept": "application/json"
 			}
-		}
+		};
 
 		const {data} = await axios.get(url, headers);
-		await tmiClient.say(channel, (data as DadJoke).joke);
+		return (data as DadJoke).joke;
 	},
 
-	async chuckJokes(channel: string) {
+	async chuckJokes() {
 		const url = "https://api.chucknorris.io/jokes/random?category=dev";
 		const {data} = await axios.get(url);
-		await tmiClient.say(channel, (data as ChuckNorrisJoke).value);
+		return (data as ChuckNorrisJoke).value;
 	},
 
-	lurk(channel: string, user: User) {
-		tmiClient.say(channel, `/me ${user.username} was teleported into the lurk lounge.`);
-	},
-
-	async uptime(channel: string, user: User) {
+	async uptime(channel: string) {
 		const channelName = channel.replace("#", "");
-
-		axios.get(`https://beta.decapi.me/twitch/uptime/${channelName}`)
-			.then(async (response: AxiosResponse) => {
-				await tmiClient.say(channel, `Hey @${user.username}, the up time for ${channelName} is: ${response.data}`);
-			})
-			.catch((error: any) => {
-				console.error("[ERROR]", error.response.data.message);
-			});
+		const res = await axios.get(`https://beta.decapi.me/twitch/uptime/${channelName}`);
+		return `The up time is: ${res.data}`;
 	},
 
-	hug(channel: string, user: User, message: string) {
+	yeet(user: User | string, message: User | string) {
 		if (!message) return;
 
 		if (message.indexOf("@") !== -1) {
 			message = message.replace("@", "");
 		}
 
-		tmiClient.say(channel, `Hey ${message}, @${user['display-name']} is sending you virtual hugs <3`);
+		return `${user} has yeeted ${message} into the oblivion.`;
 	},
-
-	yeet(channel: string, user: User, message: string) {
-		if (!message) return;
-
-		if (message.indexOf("@") !== -1) {
-			message = message.replace("@", "");
-		}
-
-		tmiClient.say(channel, `@${user['display-name']} has yeeted ${message} into the oblivion.`);
-	},
-
-	codepow(channel: string, user: User) {
-		tmiClient.say(channel, `Working on CodePow (Pow IT) which is a Twitter clone for developers which integrates NLP to detect intent and technologies in their messages think StackOverFlow + Twitter (www.codepow.io)`);
-	},
-
-	github(channel: string, user: User) {
-		console.log(channel);
-		if (channel === "#gacbl") {
-			tmiClient.say(channel, "You can find most of my project on my GitHub profile: https://github.com/gigili");
-		}
-	},
-
-	discord(channel: string, user: User) {
-		if (channel === "#gacbl") {
-			tmiClient.say(channel, "We are part of the N00bNation discord server. Join us: https://discord.gg/zfkCF63");
-		}
-	}
-}
+};

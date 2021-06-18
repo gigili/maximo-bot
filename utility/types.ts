@@ -1,8 +1,14 @@
 import {CommonUserstate} from "tmi.js";
 
-export interface User extends CommonUserstate {
-	username: string
+export interface TwitchUser extends CommonUserstate {
+	username: string;
 }
+
+export interface DiscordUser extends CommonUserstate {
+	username: string;
+}
+
+export type User = TwitchUser | DiscordUser;
 
 export type DadJoke = {
 	id: string,
@@ -78,4 +84,15 @@ export type Command = {
 
 export type MessageVariables = {
 	[key: string]: string
+}
+
+
+export enum Services {
+	Twitch = "Twitch",
+	Discord = "Discord"
+}
+
+export type ServicesType = {
+	Twitch: Services.Twitch,
+	Discord: Services.Discord
 }

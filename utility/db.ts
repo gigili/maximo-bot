@@ -26,6 +26,7 @@ export class DB {
 										  command    TEXT,
 										  output     TEXT,
 										  level      INTEGER,
+										  service    TEXT,
 										  created_at TEXT DEFAULT CURRENT_TIMESTAMP
 									  )`)
 								.then(() => {
@@ -35,6 +36,7 @@ export class DB {
 												  channel    TEXT,
 												  command    TEXT,
 												  alias      TEXT,
+												  service    TEXT,
 												  created_at TEXT DEFAULT CURRENT_TIMESTAMP
 											  )`)
 										.then(() => resolve("DB connection opened"));
@@ -77,13 +79,13 @@ export class DB {
 	async get(query: string, params: any[] = []): Promise<any> {
 		const db = (await DB.getInstance()).db;
 		return new Promise(function (resolve, reject) {
-			db?.get(query, params, function (err: Error | null, row) {
+			db?.get(query, params, function (err: Error | null, row: any) {
 				if (err) {
 					reject("Read error: " + err.message);
 				} else {
 					resolve(row);
 				}
-			})
+			});
 		})
 	}
 }
