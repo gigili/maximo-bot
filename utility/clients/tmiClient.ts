@@ -1,6 +1,6 @@
 import {config} from "../config";
 import {MemeBox} from "../../memebox";
-import {ConnectionOptions, Services, User} from "../types";
+import {ConnectionOptions, MessageVariable, MessageVariables, Services, User} from "../types";
 import {GetCommandName} from "../../commands/handler";
 
 const tmi = require("tmi.js");
@@ -54,7 +54,7 @@ export class TwitchClient {
 			}
 
 			if (message && message.startsWith("!")) {
-				const commandOutput = await GetCommandName(
+				let commandOutput = await GetCommandName(
 					getCommandFromMessage,
 					getRestOfMessage,
 					user,
@@ -63,6 +63,19 @@ export class TwitchClient {
 				);
 
 				if (!commandOutput) return;
+
+				const toUser = (getRestOfMessage.length > 0 && getRestOfMessage[0].includes("@")) ? getRestOfMessage[0].replace("@", "") : getRestOfMessage[0] ?? "";
+
+				//!test @test => Hey {toUser} this is a test => Hey test this is test
+				const variables: MessageVariables = {
+					[MessageVariable.toUser]: toUser,
+					[MessageVariable.User]: user["display-name"] ?? user.username,
+				};
+
+				for (const [key, value] of Object.entries(variables)) {
+					commandOutput = commandOutput.replace(key, value);
+				}
+
 				await client.say(channel, commandOutput);
 			}
 		});

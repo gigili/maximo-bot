@@ -82,15 +82,21 @@ export type Command = {
 	created_at: string
 }
 
-export type MessageVariables = {
-	[key: string]: string
+export enum MessageVariable {
+	User = "{user}",
+	toUser = "{toUser}"
 }
+
+export type MessageVariables = {
+	[key in MessageVariable]: string;
+};
 
 
 export enum Services {
 	Twitch = "Twitch",
 	Discord = "Discord"
 }
+
 
 export type ServicesType = {
 	Twitch: Services.Twitch,

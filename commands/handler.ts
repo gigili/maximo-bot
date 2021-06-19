@@ -1,4 +1,4 @@
-import {Command, MessageVariables, Services, User} from "../utility/types";
+import {Command, Services, User} from "../utility/types";
 import commands from "./staticCommands";
 import {getCommandLevelFromMessage, getPermissionLevels} from "../utility/helpers";
 import {DB} from "../utility/db";
@@ -10,15 +10,15 @@ export async function GetCommandName(command: string, args: string[], user: User
 
 	switch (String(command).toLowerCase()) {
 		case "!hello":
-			output = commands.hello(service === Services.Discord ? user : `@${user.username}`);
+			output = commands.hello();
 			commandFound = true;
 			break;
 		case "!wrongtip":
-			output = commands.wrongTip(service === Services.Discord ? user : `@${user.username}`);
+			output = commands.wrongTip();
 			commandFound = true;
 			break;
 		case "!wrongtop":
-			output = commands.wrongTop(service === Services.Discord ? user : `@${user.username}`);
+			output = commands.wrongTop();
 			commandFound = true;
 			break;
 		case "!dad":
@@ -35,32 +35,27 @@ export async function GetCommandName(command: string, args: string[], user: User
 			break;
 		case "!yeet":
 			const author = service === Services.Discord ? user : "@" + (user["display-name"] ?? user.username);
-			output = commands.yeet(author, args[0]);
+			output = commands.yeet();
 			commandFound = true;
 			break;
 		case "!add":
-			output = addCommand(channel, message, user, service).then(() => {
-			});
+			output = addCommand(channel, message, user, service);
 			commandFound = true;
 			break;
 		case "!edit":
-			output = updateCommand(channel, message, user, service).then(() => {
-			});
+			output = updateCommand(channel, message, user, service);
 			commandFound = true;
 			break;
 		case "!delete":
-			output = deleteCommand(channel, message, user, service).then(() => {
-			});
+			output = deleteCommand(channel, message, user, service);
 			commandFound = true;
 			break;
 		case "!alias":
-			output = addAlias(channel, message, user, service).then(() => {
-			});
+			output = addAlias(channel, message, user, service);
 			commandFound = true;
 			break;
 		case "!rmalias":
-			output = removeAlias(channel, message, user, service).then(() => {
-			});
+			output = removeAlias(channel, message, user, service);
 			commandFound = true;
 			break;
 	}
@@ -263,20 +258,6 @@ async function handleCommandFromDB(cmd: string, args: string[], channel: string,
 	const result = await getCommandFromDB(cmd, channel, user, service);
 	if (!result) return "";
 
-	//!test @test => Hey {toUser} this is a test => Hey test this is test
-	const variables: MessageVariables = {
-		"{toUser}": (args.length > 0 && args[0].includes("@")) ? args[0].replace("@", "") : args[0] ?? "",
-		"{user}": user["display-name"] ?? user.username,
-	};
-
 	const command = result as Command;
-	let output = command.output;
-
-	for (const key in variables) {
-		if (!key) continue;
-		if (!variables.hasOwnProperty(key)) continue;
-		output = output.replace(key, variables[key]);
-	}
-
-	return output;
+	return command.output;
 }

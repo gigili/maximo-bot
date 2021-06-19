@@ -1,5 +1,5 @@
 import {GetCommandName} from "../../commands/handler";
-import {Services} from "../types";
+import {MessageVariable, MessageVariables, Services} from "../types";
 
 const {Client, Intents} = require("discord.js");
 
@@ -17,7 +17,7 @@ export class DiscordClient {
 		});
 
 		this.client.on("message", (message: any) => {
-			self.onMessage(message);
+			self.onMessage(message).then();
 		});
 
 		this.client.login(process.env.BOT_DISCORD_TOKEN);
@@ -34,7 +34,7 @@ export class DiscordClient {
 		const getRestOfMessage = message.content.split(" ").slice(1);
 
 		if (message && message.content.startsWith("!")) {
-			const commandOutput = await GetCommandName(
+			let commandOutput = await GetCommandName(
 				getCommandFromMessage,
 				getRestOfMessage,
 				message.author,
@@ -43,6 +43,17 @@ export class DiscordClient {
 			);
 
 			if (!commandOutput) return;
+
+			//!test @test => Hey {toUser} this is a test => Hey test this is test
+			const variables: MessageVariables = {
+				[MessageVariable.toUser]: message.mentions.users.first(),
+				[MessageVariable.User]: message.author,
+			};
+
+			for (const [key, value] of Object.entries(variables)) {
+				commandOutput = commandOutput.replace(key, value);
+			}
+
 			message.channel.send(commandOutput);
 		}
 	}
