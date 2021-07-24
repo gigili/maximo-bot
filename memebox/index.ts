@@ -1,5 +1,5 @@
 import {config} from "../utility/config";
-import {client} from "../utility/clients/tmiClient";
+import {client} from "../clients/tmiClient";
 import {memeBoxConfig} from "./config";
 import {MemeBoxAction} from "../utility/types";
 

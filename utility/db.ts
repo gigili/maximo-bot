@@ -25,7 +25,7 @@ export class DB {
 										  channel    TEXT,
 										  command    TEXT,
 										  output     TEXT,
-										  level      INTEGER,
+										  level      TEXT,
 										  service    TEXT,
 										  created_at TEXT DEFAULT CURRENT_TIMESTAMP
 									  )`)
@@ -86,6 +86,6 @@ export class DB {
 					resolve(row);
 				}
 			});
-		})
+		});
 	}
 }

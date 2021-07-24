@@ -67,7 +67,7 @@ export type ConnectionOptions = {
 	server?: string
 }
 
-export type PermissionLevels = {
+export type TwitchPermissionLevels = {
 	isBroadcaster: boolean,
 	isMod: boolean,
 	isSub: boolean,
@@ -78,7 +78,7 @@ export type Command = {
 	channel: string,
 	command: string,
 	output: string,
-	level: number,
+	level: string,
 	created_at: string
 }
 
@@ -97,8 +97,7 @@ export enum Services {
 	Discord = "Discord"
 }
 
-
-export type ServicesType = {
+/*export type ServicesType = {
 	Twitch: Services.Twitch,
 	Discord: Services.Discord
-}
+}*/
