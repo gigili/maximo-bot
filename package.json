@@ -27,7 +27,7 @@
 	"dependencies": {
 		"axios": "^0.21.1",
 		"dotenv": "^10.0.0",
-		"tmi.js": "^1.8.4",
+		"tmi.js": "^1.8.5",
 		"typescript": "^4.3.5"
 	},
 	"devDependencies": {
