@@ -34,6 +34,6 @@
 		"@types/node": "^16.6.1",
 		"@types/tmi.js": "^1.7.2",
 		"nodemon": "^2.0.12",
-		"ts-node": "^10.2.0"
+		"ts-node": "^10.2.1"
 	}
 }
