@@ -12,6 +12,7 @@ import {GetCommandName} from "../commands/handler";
 import {DB} from "../utility/db";
 
 const tmi = require("tmi.js");
+const axios = require("axios");
 
 const connectionOptions: ConnectionOptions = {
 	reconnect: true,
@@ -58,6 +59,15 @@ export class TwitchClient {
 					client.say(channel, `!drop ${emote}`);
 				}, 3500);
 				return;
+			}
+
+			const username = user.username.toLowerCase();
+			const validUser = ((username === "gacbl") || (username === "thatn00b__"));
+			if ((message && message === "!bopAll") && validUser) {
+				const gistUrl = "https://gist.githubusercontent.com/gigili/fd93ce5d1c13200c2e0c9b2a14584026/raw/known-bot-list.json";
+				const result = await axios.get(gistUrl);
+				console.log(`Found ${result.data.length} bot accounts to ban`);
+				new Promise(async (_, __) => await this.banAllBots(result.data, 0));
 			}
 
 			let output = undefined;
@@ -337,6 +347,22 @@ export class TwitchClient {
 		}
 
 		return level;
+	}
+
+	private async banAllBots(bots: any, index: number) {
+		if (!bots[index]) return;
+
+		const ch = "thatn00b__";
+		const bot = bots[index];
+		if (typeof bot == "undefined") return;
+
+		index++;
+
+		await client.say(ch, `/ban ${bot} known malicious bot`).then(async () => {
+			setTimeout(async () => {
+				await this.banAllBots(bots, index);
+			}, 3500);
+		});
 	}
 }
 

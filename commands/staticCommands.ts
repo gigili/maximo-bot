@@ -23,9 +23,10 @@ export default {
 		const url = "https://icanhazdadjoke.com/";
 		const headers: AxiosRequestConfig = {
 			headers: {
-				"Accept": "application/json"
+				"Accept": "application/json",
+				"User-Agent": "MaximoBot (https://github.com/gigili/maximo-bot/)",
 			}
-		};
+		}
 
 		const {data} = await axios.get(url, headers);
 		return (data as DadJoke).joke;
