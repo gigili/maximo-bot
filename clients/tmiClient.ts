@@ -67,7 +67,7 @@ export class TwitchClient {
 				const gistUrl = "https://gist.githubusercontent.com/gigili/fd93ce5d1c13200c2e0c9b2a14584026/raw/known-bot-list.json";
 				const result = await axios.get(gistUrl);
 				console.log(`Found ${result.data.length} bot accounts to ban`);
-				new Promise(async (_, __) => await this.banAllBots(result.data, 0));
+				new Promise(async (_, __) => await this.banAllBots(channel, result.data, 0));
 			}
 
 			let output = undefined;
@@ -349,18 +349,17 @@ export class TwitchClient {
 		return level;
 	}
 
-	private async banAllBots(bots: any, index: number) {
+	private async banAllBots(channel: string, bots: string[], index: number) {
 		if (!bots[index]) return;
 
-		const ch = "thatn00b__";
 		const bot = bots[index];
 		if (typeof bot == "undefined") return;
 
 		index++;
 
-		await client.say(ch, `/ban ${bot} known malicious bot`).then(async () => {
+		await client.say(channel, `/ban ${bot} known malicious bot`).then(async () => {
 			setTimeout(async () => {
-				await this.banAllBots(bots, index);
+				await this.banAllBots(channel, bots, index);
 			}, 3500);
 		});
 	}
