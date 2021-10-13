@@ -32,7 +32,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^16.10.4",
-		"@types/tmi.js": "^1.7.2",
+		"@types/tmi.js": "^1.8.0",
 		"nodemon": "^2.0.13",
 		"ts-node": "^10.3.0"
 	}
