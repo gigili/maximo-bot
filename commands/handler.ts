@@ -43,9 +43,5 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 		case "!git":
 			commands.github(channel, user);
 			break;
-
-		case "!discord":
-			commands.discord(channel, user);
-			break;
 	}
 }
