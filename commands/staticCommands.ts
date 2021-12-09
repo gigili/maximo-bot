@@ -28,7 +28,8 @@ export default {
 		const url = "https://icanhazdadjoke.com/";
 		const headers: AxiosRequestConfig = {
 			headers: {
-				"Accept": "application/json"
+				"Accept": "application/json",
+				"User-Agent": "MaximoBot (https://github.com/gigili/maximo-bot/)",
 			}
 		}
 
@@ -93,12 +94,6 @@ export default {
 		console.log(channel);
 		if(channel === "#gacbl"){
 			tmiClient.say(channel, "You can find most of my project on my GitHub profile: https://github.com/gigili");
-		}
-	},
-
-	discord(channel: string, user: User){
-		if(channel === "#gacbl"){
-			tmiClient.say(channel, "We are part of the N00bNation discord server. Join us: https://discord.gg/zfkCF63");
 		}
 	}
 }
