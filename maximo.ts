@@ -1,8 +1,9 @@
 import {User} from "./utility/types";
 import {client} from "./utility/tmiClient";
+import {AxiosRequestConfig, AxiosResponse} from "axios";
 
 const commandController = require("./commands/handler");
-
+const axios = require("axios");
 
 client.on('message', async(channel: string, tags: User, message: string, self: unknown) => {
         if (self) return;
