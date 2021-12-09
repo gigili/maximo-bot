@@ -39,7 +39,7 @@ client.on('message', async(channel: string, tags: User, message: string, self: u
         }
 });
 
-async function banAllBots(bots: any, index: number, ch) {
+async function banAllBots(bots: any, index: number, ch: string) {
         if (!bots[index]) return;
 	
         const bot = bots[index];
