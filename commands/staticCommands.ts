@@ -95,5 +95,11 @@ export default {
 		if(channel === "#gacbl"){
 			tmiClient.say(channel, "You can find most of my project on my GitHub profile: https://github.com/gigili");
 		}
+	},
+
+
+	regex(channel: string, user: User){
+		tmiClient.say(channel, "Did you know that the plural of regex is regrets? LUL");
 	}
+
 }

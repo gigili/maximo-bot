@@ -23,6 +23,7 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 			break;
 
 		case "!lurk":
+			if(channel.replace("#", "").toLowerCase() !== "gacbl") break;
 			commands.lurk(channel, user);
 			break;
 
@@ -42,6 +43,9 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 			break;
 		case "!git":
 			commands.github(channel, user);
+			break;
+		case "!regex":
+			commands.regex(channel, user);
 			break;
 	}
 }
