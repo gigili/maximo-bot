@@ -85,10 +85,6 @@ export default {
 
 		tmiClient.say(channel, `@${user['display-name']} has yeeted ${message} into the oblivion.`);
 	},
-	
-	codepow(channel: string, user : User){
-		tmiClient.say(channel, `Working on CodePow (Pow IT) which is a Twitter clone for developers which integrates NLP to detect intent and technologies in their messages think StackOverFlow + Twitter (www.codepow.io)`);
-	},
 
 	github(channel: string, user: User){
 		console.log(channel);
