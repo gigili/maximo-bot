@@ -6,6 +6,7 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 		case "!hello":
 			commands.hello(channel, user);
 			break;
+			
 		case "!wrongtip":
 			commands.wrongTip(channel, user);
 			break;
@@ -38,12 +39,12 @@ export function GetCommandName(command: string, args: string[], user: User, chan
 		case "!yeet":
 			commands.yeet(channel, user, args[0]);
 			break;
-		case "!codepow":
-			commands.codepow(channel, user);
-			break;
+		
 		case "!git":
+			if(channel.replace("#", "").toLowerCase() !== "gacbl") break;
 			commands.github(channel, user);
 			break;
+			
 		case "!regex":
 			commands.regex(channel, user);
 			break;
