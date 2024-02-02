@@ -31,7 +31,7 @@
 		"typescript": "^5.3.3"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.14",
+		"@types/node": "^20.11.16",
 		"@types/tmi.js": "^1.8.6",
 		"nodemon": "^3.0.3",
 		"ts-node": "^10.9.2"
