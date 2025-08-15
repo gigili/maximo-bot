@@ -1,7 +1,7 @@
 import {Config} from "./types";
 
 export const config: Config = {
-	channels: ["gacbl", "thatn00b__", "maximobot"],
+	channels: ["gacbl", "thatn00b__", "maximobot", "astrotashka"],
 	debug: {
 		enabled: false,
 		url: "irc.fdgt.dev"
