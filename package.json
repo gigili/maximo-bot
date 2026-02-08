@@ -26,7 +26,7 @@
 	"homepage": "https://github.com/gigili/maximo-bot#readme",
 	"dependencies": {
 		"axios": "^1.13.4",
-		"dotenv": "^17.2.3",
+		"dotenv": "^17.2.4",
 		"tmi.js": "^1.8.5",
 		"typescript": "^5.9.3"
 	},
